@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mặc — Thời trang mỗi ngày</title>
+  <style>
+    :root {
+      --ink: #20211e;
+      --muted: #77786f;
+      --cream: #f7f5ef;
+      --green: #536b54;
+      --line: #e6e3da;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    .topbar {
+      background: #252923;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    header {
+      height: 76px;
+      padding: 0 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      background: #fbfaf6;
+    }
+    .logo {
+      font-family: Georgia, serif;
+      font-size: 28px;
+      letter-spacing: .16em;
+      font-weight: bold;
+    }
+    .nav { display: flex; gap: 30px; font-size: 13px; }
+    .nav a:hover { color: var(--green); }
+    .bag { font-size: 13px; }
+
+    .hero {
+      margin: 28px auto 58px;
+      width: 86%;
+      min-height: 440px;
+      background:
+        linear-gradient(90deg, rgba(30,35,29,.68), rgba(30,35,29,.06)),
+        url('https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1800&q=85')
+        center 43% / cover;
+      display: flex;
+      align-items: center;
+      color: white;
+    }
+    .hero-copy { padding: 8%; max-width: 540px; }
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font: normal clamp(42px, 6vw, 72px)/1.02 Georgia, serif;
+      margin: 18px 0;
+    }
+    .hero p {
+      line-height: 1.7;
+      max-width: 390px;
+      color: #f0f0e9;
+      font-size: 15px;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--green);
+      color: white;
+      padding: 15px 24px;
+      font-size: 12px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: 15px;
+      border: 0;
+      cursor: pointer;
+    }
+    .button:hover { background: #3e5340; }
+
+    .section { width: 86%; margin: 0 auto 76px; }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 25px;
+    }
+    .section h2 { font: normal 36px Georgia, serif; margin: 0; }
+    .section-head p { color: var(--muted); font-size: 13px; margin: 0; }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .card { min-width: 0; }
+    .product-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      background: #e5e2d9;
+      display: block;
+    }
+    .tag {
+      font-size: 10px;
+      color: var(--green);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-top: 14px;
+    }
+    .card h3 { font: normal 17px Georgia, serif; margin: 7px 0; }
+    .price { font-size: 13px; color: #5d5e57; }
+    .add {
+      float: right;
+      background: none;
+      border: 0;
+      font-size: 12px;
+      color: var(--green);
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .story {
+      background: #e9e7de;
+      padding: 45px 8%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .story h2 { font: normal 38px Georgia, serif; margin: 12px 0; }
+    .story p { color: #65665e; line-height: 1.8; font-size: 14px; }
+    .story img { width: 100%; height: 300px; object-fit: cover; }
+
+    .newsletter { text-align: center; padding: 65px 20px; }
+    .newsletter h2 { font: normal 36px Georgia, serif; margin: 0 0 12px; }
+    .newsletter p { font-size: 14px; color: var(--muted); }
+    .newsletter form {
+      margin: 24px auto;
+      display: flex;
+      max-width: 420px;
+    }
+    .newsletter input {
+      flex: 1;
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: white;
+      font-size: 13px;
+    }
+    .newsletter button { margin: 0; }
+
+    footer {
+      background: #252923;
+      color: #e9e9e2;
+      padding: 30px 7%;
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+    }
+
+    .notice {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: #252923;
+      color: #fff;
+      padding: 14px 18px;
+      font-size: 13px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: .2s;
+      pointer-events: none;
+    }
+    .notice.show { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 760px) {
+      header { padding: 0 5%; height: 66px; }
+      .nav { gap: 13px; font-size: 11px; }
+      .logo { font-size: 23px; }
+      .hero, .section { width: 92%; }
+      .hero { min-height: 390px; margin-top: 16px; }
+      .products { grid-template-columns: repeat(2, 1fr); gap: 24px 14px; }
+      .section h2, .newsletter h2 { font-size: 30px; }
+      .section-head p { display: none; }
+      .story { grid-template-columns: 1fr; padding: 32px 7%; gap: 20px; }
+      .story img { height: 220px; }
+      footer { gap: 12px; flex-wrap: wrap; }
+    }
+
+    @media (max-width: 420px) {
+      .nav { gap: 9px; }
+      .nav a:nth-child(2) { display: none; }
+      .bag { font-size: 11px; }
+      .hero-copy { padding: 7%; }
+      .hero h1 { font-size: 44px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">MIỄN PHÍ GIAO HÀNG CHO ĐƠN TỪ 800.000₫</div>
+
+  <header>
+    <a class="logo" href="#home">MẶC</a>
+    <nav class="nav">
+      <a href="#shop">Sản phẩm</a>
+      <a href="#story">Câu chuyện</a>
+      <a href="#contact">Liên hệ</a>
+    </nav>
+    <a class="bag" href="#shop">Túi hàng (<span id="count">0</span>)</a>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Bộ sưu tập mới · Thu 2026</div>
+        <h1>Mặc đẹp.<br>Sống nhẹ.</h1>
+        <p>Những thiết kế tối giản, thoải mái và dễ kết hợp — dành cho mọi ngày của bạn.</p>
+        <a class="button" href="#shop">Khám phá bộ sưu tập</a>
+      </div>
+    </section>
+
+    <section class="section" id="shop">
+      <div class="section-head">
+        <h2>Được yêu thích</h2>
+        <p>Thiết kế đẹp, chất liệu dễ chịu, mặc được thật lâu.</p>
+      </div>
+
+      <div class="products">
+        <article class="card">
+          <img class="product-img" src="https://images.unsplash.com/photo-1591369822096-ffd140ec948f?auto=format&fit=crop&w=700&q=80" alt="Áo sơ mi linen màu be">
+          <div class="tag">Bán chạy</div>
+          <h3>Áo sơ mi Linen</h3>
+          <span class="price">590.000₫</span>
+          <button class="add" data-name="Áo sơ mi Linen">+ Thêm vào túi</button>
+        </article>
+
+        <article class="card">
+          <img class="product-img" src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=700&q=80" alt="Quần jeans xanh">
+          <div class="tag">Mới về</div>
+          <h3>Quần jeans Everyday</h3>
+          <span class="price">790.000₫</span>
+          <button class="add" data-name="Quần jeans Everyday">+ Thêm vào túi</button>
+        </article>
+
+        <article class="card">
+          <img class="product-img" src="https://images.unsplash.com/photo-1566206091558-7f218b696731?auto=format&fit=crop&w=700&q=80" alt="Váy midi hoa nhí">
+          <div class="tag">Được yêu thích</div>
+          <h3>Váy midi Hoa Nhí</h3>
+          <span class="price">850.000₫</span>
+          <button class="add" data-name="Váy midi Hoa Nhí">+ Thêm vào túi</button>
+        </article>
+
+        <article class="card">
+          <img class="product-img" src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=700&q=80" alt="Áo khoác dáng rộng">
+          <div class="tag">Số lượng có hạn</div>
+          <h3>Áo khoác Dạo Phố</h3>
+          <span class="price">1.190.000₫</span>
+          <button class="add" data-name="Áo khoác Dạo Phố">+ Thêm vào túi</button>
+        </article>
+      </div>
+    </section>
+
+    <section class="section story" id="story">
+      <div>
+        <div class="eyebrow">Ít hơn, tốt hơn</div>
+        <h2>Mặc theo cách của bạn.</h2>
+        <p>MẶC tin rằng quần áo đẹp là quần áo khiến bạn thấy thoải mái là chính mình. Chúng tôi chọn phom dáng dễ mặc, màu sắc bền lâu và chất liệu thân thiện với làn da.</p>
+        <a class="button" href="#shop">Xem sản phẩm</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1000&q=80" alt="Phong cách thời trang tối giản">
+    </section>
+
+    <section class="newsletter" id="contact">
+      <h2>Nhận tin từ MẶC</h2>
+      <p>Đăng ký để nhận ưu đãi 10% cho đơn hàng đầu tiên.</p>
+      <form id="signup">
+        <input type="email" placeholder="Email của bạn" aria-label="Email của bạn" required>
+        <button class="button" type="submit">Đăng ký</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 MẶC — Thời trang mỗi ngày</span>
+    <span>Instagram · Facebook · Chính sách đổi trả</span>
+  </footer>
+
+  <div class="notice" id="notice" role="status"></div>
+
+  <script>
+    let count = 0;
+    const countEl = document.getElementById('count');
+    const notice = document.getElementById('notice');
+    let timer;
+
+    document.querySelectorAll('.add').forEach(button => {
+      button.addEventListener('click', () => {
+        countEl.textContent = ++count;
+        notice.textContent = button.dataset.name + ' đã được thêm vào túi hàng';
+        notice.classList.add('show');
+        clearTimeout(timer);
+        timer = setTimeout(() => notice.classList.remove('show'), 2200);
+      });
+    });
+
+    document.getElementById('signup').addEventListener('submit', event => {
+      event.preventDefault();
+      notice.textContent = 'Cảm ơn bạn đã đăng ký!';
+      notice.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(() => notice.classList.remove('show'), 2500);
+      event.target.reset();
+    });
+  </script>
+</body>
+</html>
